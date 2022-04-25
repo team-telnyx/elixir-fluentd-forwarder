@@ -7,15 +7,18 @@ defmodule FluentdForwarder.MixProject do
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package(),
+      name: "FluentdForwarder",
+      source_url: "https://github.com/team-telnyx/elixir-fluentd-forwarder",
+      description: description()
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {FluentdForwarder.Application, []}
+      extra_applications: [:logger]
     ]
   end
 
@@ -25,6 +28,21 @@ defmodule FluentdForwarder.MixProject do
       {:ranch, "~> 2.1"},
       {:msgpax, "~> 2.3"},
       {:telemetry, "~> 1.0"}
+    ]
+  end
+
+  defp description do
+    """
+    Fluentd Forward Protocol in Elixir.
+    """
+  end
+
+  defp package do
+    [
+      maintainers: ["Guilherme Balena Versiani <guilherme@telnyx.com>"],
+      licenses: ["Apache 2.0"],
+      links: %{"GitHub" => "https://github.com/team-telnyx/elixir-fluentd-forwarder"},
+      files: ~w"lib mix.exs README.md LICENSE"
     ]
   end
 end
