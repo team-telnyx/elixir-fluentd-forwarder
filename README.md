@@ -79,3 +79,6 @@ Use the [issue tracker][issues] for bug reports or feature requests. Open a [pul
 
 Plug source code is released under Apache License 2.0.
 Check `LICENSE` file for more information.
+
+  [issues]: https://github.com/team-telnyx/elixir-fluentd-forwarder/issues
+  [pulls]: https://github.com/team-telnyx/elixir-fluentd-forwarder/pulls
