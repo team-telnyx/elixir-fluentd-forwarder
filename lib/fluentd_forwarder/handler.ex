@@ -146,6 +146,9 @@ defmodule FluentdForwarder.Handler do
     end
   end
 
+  defp handle_msg([tag, entries], state) when is_list(entries),
+    do: handle_msg([tag, entries, %{}], state)
+
   defp handle_msg([tag, entries, options], state) when is_list(entries) do
     for [time, record] <- entries do
       call_handler(tag, time, record, state)
@@ -157,6 +160,9 @@ defmodule FluentdForwarder.Handler do
   defp handle_msg([tag, entries, %{"compressed" => "gzip"} = options], state),
     do: handle_msg([tag, :zlib.gunzip(entries), Map.delete(options, "compressed")], state)
 
+  defp handle_msg([tag, entries], state) when is_binary(entries),
+    do: handle_msg([tag, entries, %{}], state)
+
   defp handle_msg([_tag, "", options], state), do: maybe_send_ack(options, state)
 
   defp handle_msg([tag, entries, option], state) when is_binary(entries) do
@@ -165,7 +171,10 @@ defmodule FluentdForwarder.Handler do
     handle_msg([tag, pending, option], state)
   end
 
-  defp handle_msg([tag, time, record, options], state) do
+  defp handle_msg([tag, time, record], state) when is_map(record),
+    do: handle_msg([tag, time, record, %{}], state)
+
+  defp handle_msg([tag, time, record, options], state) when is_map(record) do
     call_handler(tag, time, record, state)
 
     maybe_send_ack(options, state)

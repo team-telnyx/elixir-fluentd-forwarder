@@ -27,7 +27,8 @@ defmodule FluentdForwarder.MixProject do
     [
       {:ranch, "~> 2.1"},
       {:msgpax, "~> 2.3"},
-      {:telemetry, "~> 1.0"}
+      {:telemetry, "~> 1.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
