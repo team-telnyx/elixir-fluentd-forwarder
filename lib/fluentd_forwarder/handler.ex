@@ -44,6 +44,7 @@ defmodule FluentdForwarder.Handler do
           | %{optional(opts) => opts}
           | MapSet.t()
 
+  @callback init(opts) :: opts
   @callback call(tag, time, record, opts) :: any
 
   use GenServer
