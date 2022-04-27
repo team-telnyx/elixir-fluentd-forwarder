@@ -193,7 +193,7 @@ defmodule FluentdForwarder.Handler do
     :telemetry.execute(
       [:fluentd, :forward, :event, :handled],
       %{system_time: :erlang.system_time()},
-      %{transport: transport, socket: socket, ref: ref}
+      %{transport: transport, socket: socket, ref: ref, tag: tag}
     )
   end
 
